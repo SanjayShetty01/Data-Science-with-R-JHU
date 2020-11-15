@@ -5,7 +5,7 @@ date: "15/11/2020"
 output: html_document
 ---
 
-## Cook Book
+## Code Book
 
 The run_analysis.R script performs the data preparation and then followed by the 5 steps required as described in the course project’s definition
 
