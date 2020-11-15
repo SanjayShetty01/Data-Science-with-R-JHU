@@ -1,0 +1,39 @@
+---
+title: "CookBook"
+author: "Sanjaya J Shetty"
+date: "15/11/2020"
+output: html_document
+---
+
+## Cook Book
+
+The run_analysis.R script performs the data preparation and then followed by the 5 steps required as described in the course project’s definition
+
+# Download the dataset
+
+Dataset downloaded and is extracted under the folder called UCI HAR Dataset
+
+# All dimension of Datas
+
+x_train contains 7352 obs and 561 variables
+
+x_test contains 2947 obs and 561 variables
+
+y_train contains 7352 obs and 1 variable
+
+y_test contains 2947 obs and 1 variable
+
+subject train contains 7352 obs and 1 variable
+
+subject_test contains 2947 obs and 1 variable
+
+mrg_test, which is the merged data of all test dataset contains 2947 obs and 563 variables
+
+mrg_train, which is the merged data of all test dataset contains 7352 obs anb 563 variables
+
+MergedData is the the merged data of both mrg_test and mrg_train, which contains 10299 obs and 563 variable
+
+mean_and_SD_data is created by subsetting MergedData, selecting only columns: subjectID, activityID and the measurements on the mean and standard deviation (std) for each measurement and it contains 10299 obs abd 81 variables
+
+FinalData (180 rows, 88 columns) is created by sumarizing mean_and_SD_Data taking the means of each variable for each activityID and each subjectID, after groupped by subjectID and activityID.
+
