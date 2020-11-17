@@ -30,7 +30,7 @@ Total_Coal_Emission$year <- as.factor(Total_Coal_Emission$year)
 
 png("Plot4.png", width = 1080, height = 720, units = "px")
 
-ggplot(Coal_Emission_Data, aes(x = year, y = Emissions/1000))+
+ggplot(Coal_Emission_Data, aes(x = factor(year), y = Emissions/1000))+
   geom_bar(stat = "Identity")+
   labs( x = "Years", y=expression("Total PM "[2.5]*"Emission from Coal (Kilo Tons)"))+
   labs(title =expression("PM"[2.5]*" Emissions from Coal combustion-related sources in US, 1999-2008"))+
