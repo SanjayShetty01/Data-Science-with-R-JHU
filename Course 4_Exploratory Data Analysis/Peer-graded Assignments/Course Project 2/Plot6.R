@@ -21,7 +21,7 @@ Total_Emission <-  aggregate(Emissions~year +fips, Both_Cities_Emission, sum)
 Total_Emission$fips[Total_Emission$fips == '24510'] <-  'Baltimore'
 Total_Emission$fips[Total_Emission$fips == '06037'] <-  'Los Angeles'
 
-png("Plot6.png", width = 10800, height = 720, units = 'px')
+png("Plot6.png", width = 480, height = 480, units = 'px')
 
 ggplot(Total_Emission, aes(x = factor(year), y = Emissions, fill = fips))+
       (facet_grid(fips~., scales = "free"))+
