@@ -1,0 +1,97 @@
+---
+title: 'Peer-graded Assignment: Prediction Assignment Writeup'
+author: "Sanjaya J Shetty"
+date: "25/11/2020"
+output: html_document
+---
+
+
+# Load all the library
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+set.seed(1234)
+
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(rattle)
+library(randomForest)
+```
+
+# loading and cleaning the dataset
+
+```{r, results='hide'}
+training_url <- ('https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv')
+download.file(training_url, destfile = "training_data.csv")
+
+testing_url <-  ('https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv')
+download.file(testing_url, destfile = "testing_data.csv")
+
+train_data <- read.csv('training_data.csv', header = T, sep = ',', na.strings = c("", "#DIV/0!", "NA"))
+test_data <- read.csv('testing_data.csv', header = T, sep = ',', na.strings = c("", "#DIV/0!", "NA"))
+```
+
+
+### Removing irrevelvent column entries (i.e, near-zero variance predictors, the first 5 columns seems not effect the classe variable and NA columns)
+
+### Removing NA columns
+```{r}
+train_data <- train_data[,which(colSums(is.na(train_data)) == 0)]
+test_data <-  test_data[,which(colSums(is.na(test_data)) == 0)]
+```
+
+### Remove near zero variance predictors
+```{r}
+train_data <-  train_data[, -(nearZeroVar(train_data))]
+test_data <-  test_data[, -(nearZeroVar(test_data))]
+```
+
+### Remove first 5 columns
+```{r}
+train_data <- train_data[,-(1:5)]
+test_data <-  test_data[, -(1:5)]
+
+dim(train_data)
+dim(test_data)
+```
+
+### Create a training and validation sets from the train dataset
+```{r}
+inTrain <-  createDataPartition(train_data$classe, p =0.7, list = FALSE )
+
+training <- train_data[inTrain,]
+validation <- train_data[-inTrain,]
+
+training$classe <- as.factor(training$classe)
+validation$classe <- as.factor(validation$classe)
+```
+
+## Fitting Model
+
+### With Random Forest
+```{r}
+Model_1 <- train(classe~., method = "rf", data = training, trControl = trainControl(method="cv"), number = 5, prox = T, list =F, ntree = 100 )
+Pred_1 <- predict(Model_1, validation)
+
+confusionMatrix(Pred_1, validation$classe)
+```
+
+
+### With Liner Discriminant Analysis
+```{r}
+Model_2 <- train(classe~., data = training, method = "lda")
+Pred_2 <- predict(Model_2, validation)
+
+confusionMatrix(Pred_2, validation$classe)
+```
+
+### Since the accuracy of random forest shows nearly 99.7%, So we would be using that model to predict the test data using Model_1
+
+## Final Prediction for the test data
+```{r}
+predict(Model_1, test_data)
+```
+
