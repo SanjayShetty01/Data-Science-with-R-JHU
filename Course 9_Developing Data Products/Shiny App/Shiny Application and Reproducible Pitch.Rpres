@@ -1,0 +1,52 @@
+Peer-graded Assignment: Course Project: Shiny Application and Reproducible Pitch
+========================================================
+author: Sanjaya J Shetty
+date: 25-11-2020
+autosize: true
+
+Introduction
+========================================================
+This is a *peer graded* assignment for the Fourth week of Developing Data Products.
+
+### Must have :
+- Some form of input (widget: textbox, radio button, checkbox, ...)
+- Some operation on the ui input in sever.R
+- Some reactive output displayed as a result of  server calculations
+- You must also include enough documentation so that a novice user could use your application.
+- The documentation should be at the Shiny website itself. Do not post to an external link.
+
+About the App
+========================================================
+The ShinyApp is a compound interest calculator helping you to calculate the total return to be expected from your investment. 
+
+The App uses the formula:
+
+## F = A(1+ r/t)^t
+
+where,
+
+* F = final amount,
+* A = principal amount,
+* r = rate of interest,
+* t = time period in years,
+
+
+
+Inputs and Outputs
+========================================================
+### The inputs for the application are
+- Initial Investment Amount (Numerical input)
+- Interest Rate (Estimated or actual)
+- Time period (Slider input)
+
+### The Output :
+- The final Amount
+
+
+Further Links
+========================================================
+
+## The link for the Application is attached here [Shiny App](https://sanjayshetty01.shinyapps.io/Compound_Interest_Calculator/?_ga=2.72906768.2094507749.1606319853-488001058.1606319853)
+
+## The link for the github repo is attached here [Github](https://github.com/SanjayShetty01/Data-Science-with-R-JHU/tree/main/Course%209_Developing%20Data%20Products/Shiny%20App)
+
