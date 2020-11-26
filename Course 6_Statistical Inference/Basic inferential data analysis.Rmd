@@ -1,0 +1,67 @@
+---
+title: 'Peer-graded Assignment: Statistical Inference Course Project (Part 2)'
+author: "Sanjaya J Shetty"
+date: "24/11/2020"
+output: html_document
+---
+
+# Basic inferential data analysis.
+
+## Load the libraries
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(datasets)
+```
+
+### 1. Load the ToothGrowth data and perform some basic exploratory data analyses
+```{r}
+data("ToothGrowth")
+
+str(ToothGrowth)
+head(ToothGrowth)
+tail(ToothGrowth)
+```
+
+### 2) Provide a basic summary of the data.
+```{r}
+summary(ToothGrowth)
+
+ggplot(ToothGrowth, aes(x=supp, y=len))+ 
+        geom_boxplot(aes(fill=supp))+
+        labs(x = 'Type of Supplement', y = "Length of the Tooth", title = "Relationship between Tooth length and Supplement")+
+        guides(fill=guide_legend(title="Supplement"))
+
+```
+
+```{r}
+ggplot(aes(x = factor(dose), y = len), data = ToothGrowth) + 
+    geom_boxplot(aes(fill = factor(dose)))+
+    labs(x = "Type of Dose", y = "Length of the Tooth" ,title="Relationship between Tooth Length and Dose")+
+    guides(fill=guide_legend(title="Dose"))
+```
+
+### 3) Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose.
+```{r}
+t.test(len~supp, data = ToothGrowth, paired = F)
+```
+
+```{r}
+t.test(len~supp, data = subset(ToothGrowth, dose ==0.5 ), paired = F)
+```
+
+```{r}
+t.test(len~supp, data = subset(ToothGrowth, dose ==1 ), paired = F)
+```
+
+```{r}
+t.test(len~supp, data = subset(ToothGrowth, dose ==2 ), paired = F)
+```
+
+
+# Conclusions
+
+### By looking into p-value (with Alpa = 5%) from the above Hypothesis testing we could conclude that
+
+ + The supplement OJ and VJ doesn't have a significant      impact on the average tooth growth
+ + The dose 0.5 and 1 does have any impact on the           average tooth growth
+ + The dose 2 doesn't have a significant impact on the      average tooth growth
